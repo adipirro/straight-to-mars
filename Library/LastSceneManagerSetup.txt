@@ -1,0 +1,4 @@
+sceneSetups:
+- path: Assets/Scenes/Baby's First Scene.unity
+  isLoaded: 1
+  isActive: 1
