@@ -32,6 +32,7 @@ public class QuadPlaneScript : MonoBehaviour {
 		hCall = hCall.Replace ("{TileRow}", row.ToString());
 		hCall = hCall.Replace ("{TileCol}", col.ToString());
 
+		Debug.Log ("Hey" + hCall);
 		// Make Calls
 		WWW apiMain = new WWW(mCall);
 		yield return apiMain;

@@ -5,13 +5,14 @@ public class PlaneController : MonoBehaviour {
 
 	GameObject[,] quadPlane;
 
-	int maxTileRow = 64;
-	int maxTileCol = 32;
+	 int maxTileRow = 32;
+	 int maxTileCol = 64;
 
 	// Use this for initialization
 	void Start () {
 		quadPlane = new GameObject[maxTileRow, maxTileCol];
-		instantiateQuadPlane (10, 20);
+		 instantiateQuadPlane (12, 8); // Mount Olympus
+		// instantiateQuadPlane (22, 44); // Martian Cocaine
 	}
 	
 	// Update is called once per frame
