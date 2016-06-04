@@ -4,6 +4,14 @@ using System.Collections.Generic;
 
 public class WebPane : MonoBehaviour {
 
+	public Texture2D heightTexture;
+	public Texture2D mainTexture;
+
+	public int startx;
+	public int starty;
+	public int endx;
+	public int endy;
+
 	// Use this for initialization
 	IEnumerator  Start () {
 		Debug.Log ("Started Webpane");
@@ -12,23 +20,18 @@ public class WebPane : MonoBehaviour {
 		WWW apiMainText = new WWW ("https://api.nasa.gov/mars-wmts/catalog/Mars_Viking_MDIM21_ClrMosaic_global_232m/1.0.0//default/default028mm/0/0/0.png");
 		yield return apiMainText;
 
-//		Renderer render = GetComponent<Renderer>();
-
-		applyHeightMap (apiHeight.texture, apiMainText.texture);
-//		GetComponent<Renderer>().material.SetTexture("_MainTex", apiMainText.texture);
-//		GetComponent<Renderer>().material.SetTexture("_BumpMap", apiHeight.texture);
-//		GetComponent<Renderer>().material.SetTexture("_ParallaxMap", apiHeight.texture);
-//		render.material.SetFloat ("Height", 0.1234f);
-//		render.material.SetFloat ("EdgeLength", 70000f);
+		heightTexture = apiHeight.texture;
+		mainTexture = apiMainText.texture;
+		applyHeightMap ();
 	}
 
 	// This creates an object, but runs into verice limits, we need to chunk
 	// the texture before we try to create objects to render
-	void applyHeightMap(Texture2D hMap, Texture2D mTex) {
+	void applyHeightMap() {
 		List<Vector3> verts = new List<Vector3>();
 		List<int> tris = new List<int>();
 
-		int horizontal_offset = 250;
+		int horizontal_offset = 255;
 		int vertical_offset = 10;
 
 		//Bottom left section of the map, other sections are similar
@@ -37,7 +40,7 @@ public class WebPane : MonoBehaviour {
 			for(int j = 0; j < horizontal_offset; j++)
 			{
 				//Add each new vertex in the plane
-				verts.Add(new Vector3(i, hMap.GetPixel(i,j).grayscale * vertical_offset, j));
+				verts.Add(new Vector3(i, heightTexture.GetPixel(i,j).grayscale * vertical_offset, j));
 				//Skip if a new square on the plane hasn't been formed
 				if (i == 0 || j == 0) continue;
 				//Adds the index of the three vertices in order to make up each of the two tris
@@ -55,14 +58,15 @@ public class WebPane : MonoBehaviour {
 			uvs[i] = new Vector2(verts[i].x, verts[i].z);
 
 		gameObject.AddComponent<MeshFilter>();
-//		gameObject.AddComponent<MeshRenderer>();
+		MeshRenderer render = gameObject.GetComponent<MeshRenderer>();
 		Mesh procMesh = new Mesh();
 		procMesh.vertices = verts.ToArray(); //Assign verts, uvs, and tris to the mesh
 		procMesh.uv = uvs;
 		procMesh.triangles = tris.ToArray();
 		procMesh.RecalculateNormals(); //Determines which way the triangles are facing
 		GetComponent<MeshFilter>().mesh = procMesh; //Assign Mesh object to MeshFilter	}
-		GetComponent<MeshRenderer>().material.SetTexture("_MainTex", mTex);
+		render.material.SetTexture("_MainTex", mainTexture);
+		render.material.SetTextureScale ("_MainTex", new Vector2 (1 / (float) horizontal_offset, 1 / (float) horizontal_offset));
 	}
 
 	// Update is called once per frame
