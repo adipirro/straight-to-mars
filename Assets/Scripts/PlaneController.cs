@@ -5,7 +5,7 @@ public class PlaneController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		GameObject plane = (GameObject) Instantiate (Resources.Load("Prefabs/Plane"));
+		GameObject quadPlane = (GameObject) Instantiate (Resources.Load("Prefabs/QuadPlane"));
 	}
 	
 	// Update is called once per frame
