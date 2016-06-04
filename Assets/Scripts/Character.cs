@@ -11,7 +11,6 @@ public class Character : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		Debug.Log (i++);
 		transform.Translate(new Vector3(1,0,0) * 0);
 	}
 }
