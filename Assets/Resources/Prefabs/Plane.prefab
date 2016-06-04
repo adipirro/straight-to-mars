@@ -9,8 +9,9 @@ GameObject:
   m_Component:
   - 4: {fileID: 489428}
   - 64: {fileID: 6492754}
-  - 114: {fileID: 11473420}
   - 23: {fileID: 2376798}
+  - 114: {fileID: 11463954}
+  - 33: {fileID: 3356738}
   m_Layer: 0
   m_Name: Plane
   m_TagString: Untagged
@@ -57,6 +58,13 @@ MeshRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
+--- !u!33 &3356738
+MeshFilter:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 155100}
+  m_Mesh: {fileID: 0}
 --- !u!64 &6492754
 MeshCollider:
   m_ObjectHideFlags: 1
@@ -69,7 +77,7 @@ MeshCollider:
   serializedVersion: 2
   m_Convex: 0
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &11473420
+--- !u!114 &11463954
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -77,9 +85,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 155100}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e19d94a78af7b96409f4469a23c14ca7, type: 3}
+  m_Script: {fileID: 11500000, guid: b897f0e4757b08f419316f26a680165a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mainTexture: {fileID: 0}
+  heightTexture: {fileID: 0}
+  startX: 0
+  startY: 0
+  endX: 0
+  endY: 0
+  sizeX: 0
+  sizeY: 0
+  render: {fileID: 0}
+  filter: {fileID: 0}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

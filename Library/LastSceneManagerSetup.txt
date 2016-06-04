@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Scenes/Baby's First Scene.unity
+- path: Assets/Scenes/Nate's Scene.unity
   isLoaded: 1
   isActive: 1
