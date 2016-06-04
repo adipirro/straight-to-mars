@@ -42,7 +42,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 0}
+  - {fileID: 2100000, guid: f41f84dccc61345a5ba5ff17b041a52e, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
@@ -88,16 +88,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b897f0e4757b08f419316f26a680165a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainTexture: {fileID: 0}
-  heightTexture: {fileID: 0}
-  startX: 0
-  startY: 0
-  endX: 0
-  endY: 0
-  sizeX: 0
-  sizeY: 0
-  render: {fileID: 0}
-  filter: {fileID: 0}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

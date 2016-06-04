@@ -3,23 +3,32 @@ using System.Collections;
 
 public class QuadPlaneScript : MonoBehaviour {
 
-	public static string mainTextCall = "https://api.nasa.gov/mars-wmts/catalog/Mars_Viking_MDIM21_ClrMosaic_global_232m/1.0.0//default/default028mm/0/{TileRow}/{TileCol}.png";
-	public static string heightTextCall = "https://api.nasa.gov/mars-wmts/catalog/Mars_MGS_MOLA_DEM_mosaic_global_463m_8/1.0.0//default/default028mm/0/{TileRow}/{TileCol}.png";
+	public static string mainTextCall = "https://api.nasa.gov/mars-wmts/catalog/Mars_Viking_MDIM21_ClrMosaic_global_232m/1.0.0//default/default028mm/{TileZoom}/{TileRow}/{TileCol}.png";
+	public static string heightTextCall = "https://api.nasa.gov/mars-wmts/catalog/Mars_MGS_MOLA_DEM_mosaic_global_463m_8/1.0.0//default/default028mm/{TileZoom}/{TileRow}/{TileCol}.png";
 
-	public GameObject plane;
+	public GameObject[,] plane;
+	int maxX = 2; // Divide planes into sub objects of these sizes
+	int maxY = 2;
+	int zoom = 5;
 
 	void Start () {
-		Debug.Log ("Started Webpane");
+		plane = new GameObject[maxX, maxY];
+	}
 
-		StartCoroutine(loadResources (0, 0));
+	public void Init(int row, int col) {
+		Debug.Log (row);
+		Debug.Log (col);
+		StartCoroutine(loadResources (row, col));
 	}
 
 	IEnumerator loadResources(int row, int col) {
 		// Create calls
 		string mCall = (string) mainTextCall.Clone();
+		mCall = mCall.Replace("{TileZoom}", zoom.ToString());
 		mCall = mCall.Replace ("{TileRow}", row.ToString());
 		mCall = mCall.Replace ("{TileCol}", col.ToString());
 		string hCall = (string) heightTextCall.Clone();
+		hCall = hCall.Replace("{TileZoom}", zoom.ToString());
 		hCall = hCall.Replace ("{TileRow}", row.ToString());
 		hCall = hCall.Replace ("{TileCol}", col.ToString());
 
@@ -35,7 +44,15 @@ public class QuadPlaneScript : MonoBehaviour {
 	}
 
 	void createPlanes(Texture2D mainTexture, Texture2D heightTexture) {
-		plane = (GameObject) Instantiate (Resources.Load("Prefabs/Plane"));
-		plane.GetComponent<PlaneScript> ().Init (mainTexture, heightTexture, 128, 128, 256, 256);
+		int chunkX = (heightTexture.width / maxX); // Size of a plane chunk
+		int chunkY = (heightTexture.height / maxY);
+		for (int x = 0; x < maxX; x++) {
+			for (int y = 0; y < maxY; y++) {
+				plane[x, y] = (GameObject)Instantiate (Resources.Load ("Prefabs/Plane"),
+					new Vector3(x*chunkX, 0, y*chunkY), Quaternion.identity);
+				plane[x, y].GetComponent<PlaneScript> ().Init (this.gameObject, mainTexture, heightTexture,
+					chunkX*x, chunkY*y, chunkX*(x+1), chunkY*(y+1));
+			}
+		}
 	}
 }
