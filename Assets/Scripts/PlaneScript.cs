@@ -78,7 +78,8 @@ public class PlaneScript : MonoBehaviour {
 		procMesh.uv = uvs;
 		procMesh.triangles = tris.ToArray();
 		procMesh.RecalculateNormals(); //Determines which way the triangles are facing
-		filter.mesh = procMesh; //Assign Mesh object to MeshFilter	}
+		filter.mesh = procMesh; //Assign Mesh object to MeshFilter
+		gameObject.AddComponent<MeshCollider>();
 	}
 
 	void createMainTex () {
