@@ -25,10 +25,10 @@ public class PlaneController : MonoBehaviour {
 		mainTextures = new Texture2D[maxTileRow, maxTileCol];
 		heightTextures = new Texture2D[maxTileRow, maxTileCol];
 		locations = new BaseLocation[] {
-			new CarvedUpArea(),
+//			new CarvedUpArea(),
 			new CoolCanyon(),
-			new HellasPlanitia(),
-			new MartianCocaine(),
+//			new HellasPlanitia(),
+//			new MartianCocaine(),
 			new MonsOlympus(),
 			new OtherCanyon()
 		};
@@ -90,8 +90,8 @@ public class PlaneController : MonoBehaviour {
 		MattDamon.transform.localEulerAngles = new Vector3 (0, location.StartingRotation, 0);
         var baseCamp = Instantiate(Resources.Load("Prefabs/BuildingShed")) as GameObject;
         baseCamp.transform.position = new Vector3(location.MatrixColumn * tileSizeY + location.StartingX - 100,
-            location.StartingY -100,
-            -1 * location.MatrixRow * tileSizeX + location.StartingZ);
+            location.StartingY,
+            -1 * location.MatrixRow * tileSizeX + location.StartingZ + 100);
 
         Debug.Log ("World Loaded");
 	}
