@@ -21,8 +21,8 @@ public class PlaneController : MonoBehaviour {
 
 		var MattDamon = Instantiate (Resources.Load ("Prefabs/Character/Matt Damon")) as GameObject;
         MattDamon.transform.position = new Vector3(128, 130, 128);
-        var baseCamp = Instantiate(Resources.Load("Prefabs/BuildingShed")) as GameObject;
-        baseCamp.transform.position = new Vector3(150, 26, 150);
+//        var baseCamp = Instantiate(Resources.Load("Prefabs/BuildingShed")) as GameObject;
+//        baseCamp.transform.position = new Vector3(150, 26, 150);
     }
 
 	int counter = 0;
