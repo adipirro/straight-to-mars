@@ -13,6 +13,9 @@ public class PlaneController : MonoBehaviour {
 		quadPlane = new GameObject[maxTileRow, maxTileCol];
 		 instantiateQuadPlane (12, 8); // Mount Olympus
 		// instantiateQuadPlane (22, 44); // Martian Cocaine
+
+		var MattDamon = Instantiate (Resources.Load ("Prefabs/Character/Matt Damon")) as GameObject;
+		MattDamon.transform.position = new Vector3 (128, 128, 128);
 	}
 	
 	// Update is called once per frame
