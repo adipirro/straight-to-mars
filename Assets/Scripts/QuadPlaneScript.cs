@@ -3,7 +3,6 @@ using System.Collections;
 
 public class QuadPlaneScript : MonoBehaviour {
 
-
 	public GameObject[,] plane;
 	int maxX = 2; // Divide planes into sub objects of these sizes
 	int maxY = 2;
@@ -11,8 +10,9 @@ public class QuadPlaneScript : MonoBehaviour {
 	void Start () {
 	}
 
-	public void Init(Texture2D mainTexture, Texture2D heightTexture) {
+	public void Init(GameObject planeController, Texture2D mainTexture, Texture2D heightTexture) {
 		plane = new GameObject[maxX, maxY];
+		// gameObject.transform.parent = planeController.transform;
 		createPlanes (mainTexture, heightTexture);
 	}
 
