@@ -54,7 +54,10 @@ public class PlaneScript : MonoBehaviour {
 			for(int j = 0; j <= sizeY; j++)
 			{
 				// Creates bounding vertices
-				verts.Add(new Vector3(i, (heightTexture.GetPixel(startX + i, startY + j).grayscale * verticalScale), j));
+				verts.Add(new Vector3(i, (heightTexture.GetPixel(
+					(int) Mathf.Clamp(startX + i, 0.0F, heightTexture.width - 1),
+					(int) Mathf.Clamp(startY + j, 0.0F, heightTexture.height - 1)).grayscale * verticalScale), j));
+
 				// We need an extra column to define edges of box, so we need to skip one row
 				if ((i == 0) || (j == 0)) continue;
 

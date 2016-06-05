@@ -47,8 +47,15 @@ public class QuadPlaneScript : MonoBehaviour {
 	void createPlanes(Texture2D mainTexture, Texture2D heightTexture) {
 		int chunkX = (heightTexture.width / maxX); // Size of a plane chunk
 		int chunkY = (heightTexture.height / maxY);
-		for (int x = 0; x < maxX; x++) {
-			for (int y = 0; y < maxY; y++) {
+		int startX = 0;
+		int startY = 0;
+		int endX = maxX;
+		int endY = maxY;
+//		int endX = 1;
+//		int endY = 1;
+
+		for (int x = startX; x < endX; x++) {
+			for (int y = startX; y < endY; y++) {
 				plane[x, y] = (GameObject)Instantiate (Resources.Load ("Prefabs/Plane"),
 					new Vector3(x*chunkX, 0, y*chunkY), Quaternion.identity);
 				plane[x, y].GetComponent<PlaneScript> ().Init (this.gameObject, mainTexture, heightTexture,
