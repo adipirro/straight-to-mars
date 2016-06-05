@@ -34,11 +34,7 @@ public class PlaneController : MonoBehaviour {
 		};
 
 		var p = locations[Random.Range(0, locations.Length - 1)];
-		instantiateQuadPlane (p.MatrixRow, p.MatrixColumn);
-
-		MattDamon.transform.position = new Vector3 (p.StartingX, p.StartingY, p.StartingZ);
-		MattDamon.transform.localEulerAngles = new Vector3 (0, p.StartingRotation, 0);
-
+		teleport (p);
     }
 
 	int counter = 0;
@@ -58,10 +54,10 @@ public class PlaneController : MonoBehaviour {
 		return quadPlane [row, col];
 	}
 
-	public void teleport(int row, int col) {
+	public void teleport(BaseLocation location) {
 		destroyWorld ();
-		StartCoroutine(loadResources (row, col));
-		StartCoroutine(loadWorld (row, col));
+		StartCoroutine(loadResources (location.MatrixRow, location.MatrixColumn));
+		StartCoroutine(loadWorld (location));
 	}
 
 	void destroyWorld() {
@@ -73,22 +69,25 @@ public class PlaneController : MonoBehaviour {
 		}
 	}
 
-	IEnumerator loadWorld(int row, int col) {
+	IEnumerator loadWorld(BaseLocation location) {
 		while (loaded == 0) {
 			Debug.Log ("Load world status " + loaded);
 			yield return new WaitForSeconds (0.5f);
 		}
 
-		for (int a = row - 1; a <= row + 1; a++) {
-			for (int b = col - 1; b <= col + 1; b++) {
+		for (int a = location.MatrixRow - 1; a <= location.MatrixRow + 1; a++) {
+			for (int b = location.MatrixColumn - 1; b <= location.MatrixColumn + 1; b++) {
 				GameObject quadPlane = instantiateQuadPlane(a, b, mainTextures[a,b], heightTextures[a,b]);
 			}
 		}
 
-		new Vector3 (col * tileSizeY, 0, -1 * row * tileSizeX);
+		new Vector3 (location.MatrixColumn * tileSizeY, 0, -1 * location.MatrixRow * tileSizeX);
 
 		var MattDamon = Instantiate (Resources.Load ("Prefabs/Character/Matt Damon")) as GameObject;
-		MattDamon.transform.position = new Vector3 (col * tileSizeY, 300, -1 * row * tileSizeX);
+		MattDamon.transform.position = new Vector3 (location.MatrixColumn * tileSizeY + location.StartingX, 
+			location.StartingY, 
+			-1 * location.MatrixRow * tileSizeX + location.StartingZ);
+		MattDamon.transform.localEulerAngles = new Vector3 (0, location.StartingRotation, 0);
 //        var baseCamp = Instantiate(Resources.Load("Prefabs/BuildingShed")) as GameObject;
 //        baseCamp.transform.position = new Vector3(150, 26, 150);
 
