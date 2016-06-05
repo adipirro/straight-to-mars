@@ -8,8 +8,10 @@ public class PlaneController : MonoBehaviour {
 
 	GameObject[,] quadPlane;
 
-	 int maxTileRow = 32;
-	 int maxTileCol = 64;
+	int maxTileRow = 32;
+	int maxTileCol = 64;
+
+	int loaded = 0;
 
 	// Use this for initialization
 	void Start () {
@@ -19,10 +21,6 @@ public class PlaneController : MonoBehaviour {
 		// instantiateQuadPlane (16, 24); // Canyon
 		teleport(12, 8);
 
-		var MattDamon = Instantiate (Resources.Load ("Prefabs/Character/Matt Damon")) as GameObject;
-        MattDamon.transform.position = new Vector3(128, 130, 128);
-//        var baseCamp = Instantiate(Resources.Load("Prefabs/BuildingShed")) as GameObject;
-//        baseCamp.transform.position = new Vector3(150, 26, 150);
     }
 
 	int counter = 0;
@@ -45,15 +43,29 @@ public class PlaneController : MonoBehaviour {
 	public void teleport(int row, int col) {
 		destroyWorld ();
 		StartCoroutine(loadResources (row, col));
+		StartCoroutine(loadWorld ());
 	}
 
 	void destroyWorld() {
+		loaded = 0;
 		for (int a = 0; a < maxTileRow; a++) {
 			for (int b = 0; b < maxTileCol; b++) {
 				Destroy (quadPlane [a, b]);
 			}
 		}
+	}
 
+	IEnumerator loadWorld() {
+		while (loaded == 0) {
+			Debug.Log ("Load world status " + loaded);
+			yield return new WaitForSeconds (0.5f);
+		}
+		var MattDamon = Instantiate (Resources.Load ("Prefabs/Character/Matt Damon")) as GameObject;
+		MattDamon.transform.position = new Vector3(128, 130, 128);
+        var baseCamp = Instantiate(Resources.Load("Prefabs/BuildingShed")) as GameObject;
+        baseCamp.transform.position = new Vector3(150, 26, 150);
+
+		Debug.Log ("World Loaded");
 	}
 
 	IEnumerator loadResources(int row, int col) {
@@ -77,6 +89,7 @@ public class PlaneController : MonoBehaviour {
 
 		// Create Planes
 		instantiateQuadPlane(row, col, apiMain.texture, apiHeight.texture);
+		loaded = 1;
 	}
 
 }
