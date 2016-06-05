@@ -11,8 +11,9 @@ public class PlaneController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		quadPlane = new GameObject[maxTileRow, maxTileCol];
-		 instantiateQuadPlane (16, 24); // Mount Olympus
+		 instantiateQuadPlane (12, 8); // Mount Olympus
 		// instantiateQuadPlane (22, 44); // Martian Cocaine
+		// instantiateQuadPlane (16, 24); // Canyon
 
 		var MattDamon = Instantiate (Resources.Load ("Prefabs/Character/Matt Damon")) as GameObject;
 		MattDamon.transform.position = new Vector3 (128, 128, 128);
