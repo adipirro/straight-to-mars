@@ -8,6 +8,7 @@ public class PlaneController : MonoBehaviour {
 
 	GameObject[,] quadPlane; // Destroy this
 	Texture2D[,] mainTextures; // Keep these
+	BaseLocation[] locations;
 	Texture2D[,] heightTextures;
 
 	int maxTileRow = 32;
@@ -23,10 +24,20 @@ public class PlaneController : MonoBehaviour {
 		quadPlane = new GameObject[maxTileRow, maxTileCol];
 		mainTextures = new Texture2D[maxTileRow, maxTileCol];
 		heightTextures = new Texture2D[maxTileRow, maxTileCol];
-		// instantiateQuadPlane (12, 8); // Mount Olympus
-		// instantiateQuadPlane (22, 44); // Martian Cocaine
-		// instantiateQuadPlane (16, 24); // Canyon
-		teleport(12, 8);
+		locations = new BaseLocation[] {
+			new CarvedUpArea(),
+			new CoolCanyon(),
+			new HellasPlanitia(),
+			new MartianCocaine(),
+			new MonsOlympus(),
+			new OtherCanyon()
+		};
+
+		var p = locations[Random.Range(0, locations.Length - 1)];
+		instantiateQuadPlane (p.MatrixRow, p.MatrixColumn);
+
+		MattDamon.transform.position = new Vector3 (p.StartingX, p.StartingY, p.StartingZ);
+		MattDamon.transform.localEulerAngles = new Vector3 (0, p.StartingRotation, 0);
 
     }
 
