@@ -88,10 +88,12 @@ public class PlaneController : MonoBehaviour {
 			location.StartingY, 
 			-1 * location.MatrixRow * tileSizeX + location.StartingZ);
 		MattDamon.transform.localEulerAngles = new Vector3 (0, location.StartingRotation, 0);
-//        var baseCamp = Instantiate(Resources.Load("Prefabs/BuildingShed")) as GameObject;
-//        baseCamp.transform.position = new Vector3(150, 26, 150);
+        var baseCamp = Instantiate(Resources.Load("Prefabs/BuildingShed")) as GameObject;
+        baseCamp.transform.position = new Vector3(location.MatrixColumn * tileSizeY + location.StartingX - 100,
+            location.StartingY -100,
+            -1 * location.MatrixRow * tileSizeX + location.StartingZ);
 
-		Debug.Log ("World Loaded");
+        Debug.Log ("World Loaded");
 	}
 
 	IEnumerator loadResources(int row, int col) {
