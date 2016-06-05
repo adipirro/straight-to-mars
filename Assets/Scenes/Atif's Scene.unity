@@ -25,7 +25,7 @@ RenderSettings:
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
   m_AmbientIntensity: 1
   m_AmbientMode: 3
-  m_SkyboxMaterial: {fileID: 0}
+  m_SkyboxMaterial: {fileID: 2100000, guid: b22d7be7b41d68745aecdfce4c70c426, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -85,6 +85,48 @@ NavMeshSettings:
     cellSize: 0.16666667
     manualCellSize: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1001 &773130723
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 441988, guid: 498715825ea7e934392a31a028919056, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 6.0267596
+      objectReference: {fileID: 0}
+    - target: {fileID: 441988, guid: 498715825ea7e934392a31a028919056, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 7.4392123
+      objectReference: {fileID: 0}
+    - target: {fileID: 441988, guid: 498715825ea7e934392a31a028919056, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: -6.9586344
+      objectReference: {fileID: 0}
+    - target: {fileID: 441988, guid: 498715825ea7e934392a31a028919056, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 441988, guid: 498715825ea7e934392a31a028919056, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 441988, guid: 498715825ea7e934392a31a028919056, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 441988, guid: 498715825ea7e934392a31a028919056, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 441988, guid: 498715825ea7e934392a31a028919056, type: 2}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 498715825ea7e934392a31a028919056, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &1612850140
 GameObject:
   m_ObjectHideFlags: 0
